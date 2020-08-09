@@ -20,14 +20,14 @@
                 <input type="text" name="status" class="form-control" value="Return Borrow" readonly>
             </div>
 
-            <div class="form-group">
-                <label for="exampleFormControlSelect1">Student</label>
-                <select name="student_id" class="form-control" id="exampleFormControlSelect1">
-                    @foreach($students as $student)
-                        <option value="{{$student->id}}">{{$student->student_name}}</option>
-                    @endforeach
-                </select>
-            </div>
+{{--            <div class="form-group">--}}
+{{--                <label for="exampleFormControlSelect1">Student</label>--}}
+{{--                <select name="student_id" class="form-control" id="exampleFormControlSelect1">--}}
+{{--                    @foreach($students as $student)--}}
+{{--                        <option value="{{$student->id}}">{{$student->student_name}}</option>--}}
+{{--                    @endforeach--}}
+{{--                </select>--}}
+{{--            </div>--}}
 
             <div class="form-group form-check">
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">

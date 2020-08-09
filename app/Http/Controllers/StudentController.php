@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RequestStudent;
 use App\Http\Services\StudentServices;
 use Illuminate\Http\Request;
 
@@ -42,7 +43,7 @@ class StudentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RequestStudent $request)
     {
         //
         $this->studentServices->store($request);

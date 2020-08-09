@@ -2,10 +2,9 @@
 @section('tittle','create student')
 
 @section('content')
-
     <div class="container">
 
-        <form method="post" action="">
+        <form method="post" action="{{route('students.store')}}">
             @csrf
             <div class="form-group">
                 <label for="exampleInputEmail1">Student</label>
@@ -30,7 +29,13 @@
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-
+        <div class="error-message">
+            @if ($errors->any())
+                @foreach($errors->all() as $nameError)
+                    <p style="color:red">{{ $nameError }}</p>
+                @endforeach
+            @endif
+        </div>
     </div>
 
 @endsection

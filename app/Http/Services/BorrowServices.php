@@ -42,7 +42,7 @@ class BorrowServices
         $borrow->borrow_date = $request->borrow_date;
         $borrow->return_date = $request->return_date;
         $borrow->status	= $request->status;
-        $borrow->student_id = $request->student_id;
+//        $borrow->student_id = $request->student_id;
 
         $this->borrowRepo->save($borrow);
     }

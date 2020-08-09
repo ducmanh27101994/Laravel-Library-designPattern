@@ -5,8 +5,8 @@ namespace App\Http\Services;
 
 
 
-
 use App\Http\Repositories\StudentRepositories;
+use App\Http\Requests\RequestStudent;
 use App\Student;
 use Illuminate\Http\Request;
 
@@ -23,12 +23,12 @@ class StudentServices
         return $this->studentRepo->getAll();
     }
 
-    function store(Request $request){
+    function store(RequestStudent $request){
         $student = new Student();
-        $student->student_name = $request->input('student_name');
-        $student->class = $request->input('class');
-        $student->phone = $request->input('phone');
-        $student->address = $request->input('address');
+        $student->student_name = $request->student_name;
+        $student->class = $request->class;
+        $student->phone = $request->phone;
+        $student->address = $request->address;
 
         $this->studentRepo->save($student);
     }
