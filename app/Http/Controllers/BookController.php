@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Services\BookServices;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
@@ -21,7 +23,6 @@ class BookController extends Controller
     public function index()
     {
         //
-
         $books = $this->bookServices->getAll();
         return view('books.list',compact('books'));
     }
@@ -102,8 +103,28 @@ class BookController extends Controller
     }
 
     function search(Request $request){
-        $books = $this->bookServices->search($request);
-        return view('books.list',compact('books'));
+//        $books = $this->bookServices->search($request);
+//        return view('books.list',compact('books'));
+
+        if ($request->ajax()){
+            if ($request->ajax()){
+                $output = '';
+                $books = DB::table('books')->where('book_name', 'LIKE', '%' . $request->search . '%')->get();
+                if ($books){
+                    foreach ($books as $key => $book){
+                        $output .= '<tr>
+                    <td>' . $book->id . '</td>
+                    <td>' . $book->book_name . '</td>
+                    <td>' . $book->author . '</td>
+                    <td>' . $book->status . '</td>
+
+                    </tr>';
+                    }
+                }
+
+                return Response($output);
+            }
+        }
 
     }
 }

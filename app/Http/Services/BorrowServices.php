@@ -5,6 +5,7 @@ namespace App\Http\Services;
 
 
 use App\Borrow;
+use App\Http\Repositories\BookRepositories;
 use App\Http\Repositories\BorrowRepositories;
 use App\Http\Repositories\StudentRepositories;
 use Illuminate\Http\Request;
@@ -12,9 +13,11 @@ use Illuminate\Http\Request;
 class BorrowServices
 {
     protected $borrowRepo;
+    protected $bookRepo;
 
 
-    function __construct(BorrowRepositories $borrowRepo)
+    function __construct(BorrowRepositories $borrowRepo,
+                        BookRepositories $bookRepo)
     {
         $this->borrowRepo = $borrowRepo;
     }
@@ -31,6 +34,9 @@ class BorrowServices
         $borrow->student_id = $request->student_id;
 
         $this->borrowRepo->save($borrow);
+
+        $borrow->books()->sync($request->book);
+
     }
 
     function edit($id){
@@ -45,6 +51,8 @@ class BorrowServices
 //        $borrow->student_id = $request->student_id;
 
         $this->borrowRepo->save($borrow);
+
+        $borrow->books()->sync($request->book);
     }
 
     function delete($id){

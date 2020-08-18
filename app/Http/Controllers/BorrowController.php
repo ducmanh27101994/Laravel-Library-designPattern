@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Book;
+use App\Detail;
+use App\Http\Services\BookServices;
 use App\Http\Services\BorrowServices;
 use App\Http\Services\StudentServices;
 use App\Student;
@@ -11,12 +14,16 @@ class BorrowController extends Controller
 {
     protected $borrowService;
     protected $studentService;
+    protected $bookService;
+
 
     function __construct(BorrowServices $borrowService,
-                         StudentServices $studentService)
+                         StudentServices $studentService,
+                        BookServices $bookServices)
     {
         $this->borrowService = $borrowService;
         $this->studentService = $studentService;
+        $this->bookService = $bookServices;
     }
 
     /**
@@ -41,7 +48,8 @@ class BorrowController extends Controller
     {
         //
         $students = $this->studentService->getAll();
-        return view('borrows.create',compact('students'));
+        $books = $this->bookService->getAll();
+        return view('borrows.create',compact('students','books'));
     }
 
     /**
@@ -54,7 +62,7 @@ class BorrowController extends Controller
     {
         //
         $this->borrowService->store($request);
-        return redirect()->route('details.create');
+        return redirect()->route('details.showDetails');
     }
 
     /**
@@ -79,7 +87,10 @@ class BorrowController extends Controller
         //
         $borrow = $this->borrowService->edit($id);
         $students = $this->studentService->getAll();
-        return view('borrows.edit',compact('borrow','students',$borrow->id));
+        $borrows = $this->borrowService->getAll();
+        $books = $this->bookService->getAll();
+//        $book = $this->bookService->edit($id);
+        return view('borrows.edit',compact('borrow','students','borrows','books'));
     }
 
     /**

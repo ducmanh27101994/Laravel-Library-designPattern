@@ -13,4 +13,5 @@ class Book extends Model
         return $this->belongsToMany('App\Borrow','details','book_id','borrow_id');
     }
 
+
 }

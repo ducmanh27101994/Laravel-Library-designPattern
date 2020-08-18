@@ -3,8 +3,11 @@
 
 @section('content')
 
+
+
     <div class="container">
     <a href="{{route('students.create')}}">Add Student</a>
+
         <table class="table">
             <thead class="thead-dark">
             <tr>

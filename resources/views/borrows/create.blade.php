@@ -9,11 +9,13 @@
             @csrf
             <div class="form-group">
                 <label for="exampleInputEmail1">Borrow Date</label>
-                <input type="date" name="borrow_date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <input type="date" name="borrow_date" class="form-control" id="exampleInputEmail1"
+                       aria-describedby="emailHelp">
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail1">Return Date</label>
-                <input type="date" name="return_date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <input type="date" name="return_date" class="form-control" id="exampleInputEmail1"
+                       aria-describedby="emailHelp">
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail1">Status</label>
@@ -28,6 +30,14 @@
                     @endforeach
                 </select>
             </div>
+            <label for="exampleFormControlSelect1">Book</label>
+            @foreach($books as $book)
+                <div class="checkbox">
+                    <label><input  name="book[{{$book->id}}]" type="checkbox" value="{{$book->id}}">{{$book->book_name}}
+                    </label>
+                </div>
+            @endforeach
+
 
             <div class="form-group form-check">
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
